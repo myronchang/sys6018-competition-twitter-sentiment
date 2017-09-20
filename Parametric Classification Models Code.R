@@ -113,8 +113,12 @@ summary(model.lg)
 
 
 
-
-
+# Parametric models having difficulty because they are biased wrong way
+# Assumes linear relationship, but probably not a linear relationship here
+# Not much improvement beyond guessing mostly 3s.
+# 
+# Sample size is small, almost 1000 points with a high-dimensional data
+# Would prefer 100000 or millions of points.
 
 
 
@@ -206,9 +210,10 @@ as.matrix(test.clean.tfidf[1:5,1:5])
 cleanedtestdata <- as.data.frame(as.matrix(test.clean.tfidf))
 newtestdata <- cbind(testing,cleanedtestdata)
 
-predictions <- as.data.frame(round(predict(model2, newdata=newtestdata)))
+predictions <- as.data.frame(predict(ordinal.model2, newdata=newtestdata))
 names(predictions) <- "sentiment"
 submission <- cbind(newtestdata$id, predictions)
 names(submission) <- c("id","sentiment")
+# 964 3s | 9 4s | 6 5s
 
-write.csv(submission, "ParametricModelPredictions.csv", row.names=FALSE)
+write.csv(submission, "Parametric_Model_Ordinal_Logistic_Regression_Predictions.csv", row.names=FALSE)
