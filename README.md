@@ -20,9 +20,9 @@ Private score: 0.64693
 
 
 Reflection questions:
-1. Who might care about this problem and why?
-2. Why might this problem be challenging?
-3. What other problems resemble this problem?
+#1. Who might care about this problem and why?
+#2. Why might this problem be challenging?
+#3. What other problems resemble this problem?
 
 
 1.	Automobile company executives may care about this particular problem because they may consider whether to make a strategic decision to make and sell driverless cars based on the results from this problem. If Twitter sentiment is mostly positive, the executives may infer that there is a market for driverless cars and decide to get in that market.  On the other hand, if Twitter sentiment is neutral or negative, then they may decide not to pursue this market. With an accurate predictive model from this Kaggle competition, the executives can keep an eye on current, recent tweets and essentially know the current sentiment of society on driverless cars. Lawmakers and legislators may also care about this problem for policy reasons; they will push for laws corresponding to how they perceive their constituents feel about driverless cars. Additionally, researchers who specialize in text analysis may care about this problem, not specifically with regards to driverless cars but rather how this problem and the model generated from it can be tailored to other text mining problems.
