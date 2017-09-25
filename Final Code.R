@@ -434,6 +434,29 @@ totalaccuracy.olr2    # 0.6146789
 
 ################### Nonparametric K-nearest neighbors ###################
 
+# The goal here was to maximize prediction accuracy using K-Nearest Neighbors
+# I found that this was difficult, and I was unable to train a model that performed 
+# better than a non-intelligent guess of 3. In other words, my model lacked predictive
+# power. My guess is that, as a non-parametric method, KNN lacked the large number of 
+# observations required (there were only 1000 observations to train on) to actually 
+# buil good predictive power. At the same time, since we're working in text mining with
+# term document matrices, there was an issue with the large amount of dimensionality 
+# in our training data. However, it wasn't for lack of trying. Over the course of model
+# selection I tweaked a large number of possible variables to try to eke out the best
+# performance possible. Results are summarized in a plot attached as part of the 
+# submission. The LOOCV is implemented as part of the KNN function itself.
+
+# Playing around with weightings
+#lapply(X = c('weightTfIdf', 'weightTf', 'weightBin', 'weightSMART'), function(Z){
+# I tried all 4 possible weightings to see which one yielded the best results. weightTfIdf was the best
+# compute TF-IDF matrix and inspect sparsity
+# twitter.tfidf = DocumentTermMatrix(twitter_corpus, control = list(weighting = get(Z)))
+
+  # I went through to find the sensitivity to varying sparsity
+  # most_of_the_way <- bind_rows(lapply(X = seq(.9, .995, .005), function(X){
+  # I was curious to see what sparsity would produce the best test accuracy. It turns out the closer to 1 you got (more terms), the better
+  # twitter.tfidf.sparse = twitter.clean.tfidf
+  # twitter.tfidf.sparse = removeSparseTerms(twitter.clean.tfidf, X)  # remove terms that are absent from at least X% of documents (keep most terms)
 
 
 # For KNN, we chose to use the TF-IDF matrix with the 99.5% sparsity threshold,
@@ -515,13 +538,13 @@ funcKNN <- function(train, test = NA, prediction_column, k){
     })
   }
 }
-# k_outputs <- bind_rows(lapply(X = 1:50, function(Y){ # The goal here was to see how sensitive the test accuracy was to varying values of k
-#   pred_accuracy <- funcKNN(twitter.tfidf.sparse, prediction_column = train_data$sentiment, k = Y)
-#   return(tibble(acc = pred_accuracy, k = Y))
-# }))
-# k_outputs$scarcity <- X
-# return(k_outputs)
-# }))
+    # k_outputs <- bind_rows(lapply(X = 1:50, function(Y){ # The goal here was to see how sensitive the test accuracy was to varying values of k
+    #   pred_accuracy <- funcKNN(twitter.tfidf.sparse, prediction_column = train_data$sentiment, k = Y)
+    #   return(tibble(acc = pred_accuracy, k = Y))
+    # }))
+  # k_outputs$scarcity <- X
+  # return(k_outputs)
+  # }))
 # most_of_the_way$weighting <- Z
 # return(most_of_the_way)
 # })
